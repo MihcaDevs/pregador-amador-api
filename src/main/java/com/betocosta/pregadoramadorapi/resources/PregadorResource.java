@@ -1,29 +1,28 @@
 package com.betocosta.pregadoramadorapi.resources;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.betocosta.pregadoramadorapi.domain.Pregador;
+import com.betocosta.pregadoramadorapi.services.PregadorService;
 
 @RestController
-@RequestMapping(value = "/categorias")
+@RequestMapping(value = "/pregadores")
 public class PregadorResource {
 	
-	@RequestMapping(method = RequestMethod.GET)
-	public List<Pregador> listar() {
+	@Autowired
+	private PregadorService service;
+	
+	@RequestMapping(value="/{id}", method = RequestMethod.GET)
+	public ResponseEntity<?> find(@PathVariable Integer id) {
+		Pregador obj = service.buscar(id);
+		return ResponseEntity.ok().body(obj);
 		
-		Pregador preg1 = new Pregador(1, "Abilio Santana");
-		Pregador preg2 = new Pregador(1, "Marco Feliciano");
 		
-		List<Pregador> lista = new ArrayList<>();
-		lista.add(preg1);
-		lista.add(preg2);
-		
-		return lista;
 	}
 
 }
