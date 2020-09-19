@@ -14,14 +14,17 @@ import com.betocosta.pregadoramadorapi.services.PregadorService;
 @RequestMapping(value = "/pregadores")
 public class PregadorResource {
 	
+	
+	
 	@Autowired
 	private PregadorService service;
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		Pregador obj = service.buscar(id);
-		return ResponseEntity.ok().body(obj);
+		return ResponseEntity.ok().body(obj);	        
 		
+	
 		
 	}
 
